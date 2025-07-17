@@ -12,7 +12,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: true
+    detectSessionInUrl: true,
+    flowType: 'pkce'
   },
   db: {
     schema: 'public'
@@ -196,9 +197,9 @@ export interface Database {
           codigo_barras?: string | null;
           descripcion?: string | null;
           precio: number;
-          Medida: string;
-          rendimiento_M2: number;
-          precio_M2: number;
+          Medida?: string | null;
+          rendimiento_M2?: number | null;
+          precio_M2?: number | null;
           marca_id: string;
           formato_id?: string | null;
           departamento?: string | null;
@@ -216,9 +217,9 @@ export interface Database {
           codigo_barras?: string | null;
           descripcion?: string | null;
           precio?: number;
-          Medida?: string;
-          rendimiento_M2?: number;
-          precio_M2?: number;
+          Medida?: string | null;
+          rendimiento_M2?: number | null;
+          precio_M2?: number | null;
           marca_id?: string;
           formato_id?: string | null;
           departamento?: string | null;

@@ -131,15 +131,15 @@ const ProductTechnicalSheet: React.FC<ProductTechnicalSheetProps> = ({
                   <div className="grid grid-cols-3 gap-4">
                     <div>
                       <label className="text-sm font-medium text-gray-500">Medida</label>
-                      <p className="text-gray-900">{product.medida}</p>
+                      <p className="text-gray-900">{product.Medida || 'N/A'}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-500">Rendimiento/M²</label>
-                      <p className="text-gray-900">{product.rendimiento_M2} pzs/m²</p>
+                      <p className="text-gray-900">{product.rendimiento_M2 ? `${product.rendimiento_M2} pzs/m²` : 'N/A'}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-500">Precio/M²</label>
-                      <p className="text-gray-900">${product.precio_M2}</p>
+                      <p className="text-gray-900">{product.precio_M2 ? `$${product.precio_M2}` : 'N/A'}</p>
                     </div>
                   </div>
 

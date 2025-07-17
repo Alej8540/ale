@@ -228,20 +228,6 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
       return;
     }
 
-    if (!productData.Medida.trim()) {
-      alert('La medida es requerida');
-      return;
-    }
-
-    if (!productData.rendimiento_M2 || parseFloat(productData.rendimiento_M2) <= 0) {
-      alert('El rendimiento por M² debe ser un número válido mayor a 0');
-      return;
-    }
-
-    if (!productData.precio_M2 || parseFloat(productData.precio_M2) <= 0) {
-      alert('El precio por M² debe ser un número válido mayor a 0');
-      return;
-    }
     // Validar especificaciones del departamento
     if (currentBrand && currentDepartment) {
       const validation = validateSpecifications(currentBrand.department, especificaciones);
@@ -289,9 +275,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
         codigo_barras: productData.codigo_barras.trim() || null,
         descripcion: productData.descripcion.trim() || null,
         precio: parseFloat(productData.precio),
-        Medida: productData.Medida.trim(),
-        rendimiento_M2: parseFloat(productData.rendimiento_M2),
-        precio_M2: parseFloat(productData.precio_M2),
+        Medida: productData.Medida.trim() || null,
+        rendimiento_M2: productData.rendimiento_M2 ? parseFloat(productData.rendimiento_M2) : null,
+        precio_M2: productData.precio_M2 ? parseFloat(productData.precio_M2) : null,
         marca_id: brandId,
         formato_id: null,
         departamento: currentDepartment?.name || 'General',
@@ -440,8 +426,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
                   <img
                     src={imagePreview}
                     alt="Preview"
-                    className="mx-auto h-40 w-40 object-cover rounded-lg mb-4 border border-gray-200"
+                    className="mx-auto h-64 w-full max-w-md object-cover rounded-lg mb-4 border border-gray-200 shadow-sm"
                   />
+                  <p className="text-sm text-gray-600 mb-4">Vista previa de la imagen</p>
                   <label className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                     <Upload className="w-4 h-4 mr-2" />
                     Cambiar imagen
@@ -456,7 +443,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
                 </div>
               ) : (
                 <div className="text-center">
-                  <div className="mx-auto h-40 w-40 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                  <div className="mx-auto h-48 w-full max-w-md bg-gray-100 rounded-lg flex items-center justify-center mb-4">
                     <Upload className="w-8 h-8 text-gray-400" />
                   </div>
                   <label className="cursor-pointer inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
@@ -594,7 +581,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
           {/* Medida */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Medida *
+              Medida
             </label>
             <input
               type="text"
@@ -602,14 +589,13 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
               onChange={(e) => setProductData(prev => ({ ...prev, Medida: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               placeholder="ej. 30x30 cm, 60x60 cm"
-              required
             />
           </div>
 
           {/* Rendimiento M2 */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Rendimiento por M² *
+              Rendimiento por M² (opcional)
             </label>
             <div className="relative">
               <input
@@ -620,7 +606,6 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
                 placeholder="11"
                 step="0.01"
                 min="0"
-                required
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
                 pzs/m²
@@ -634,7 +619,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
           {/* Precio M2 */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Precio por M² *
+              Precio por M² (opcional)
             </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
@@ -646,7 +631,6 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSa
                 placeholder="50.00"
                 step="0.01"
                 min="0"
-                required
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
                 MXN/m²

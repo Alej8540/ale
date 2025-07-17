@@ -139,15 +139,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Medida:</span>
-            <span className="text-gray-900">{product.medida}</span>
+            <span className="text-gray-900">{product.Medida || 'N/A'}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Rendimiento:</span>
-            <span className="text-gray-900">{product.rendimiento_M2} pzs/m²</span>
+            <span className="text-gray-900">{product.rendimiento_M2 ? `${product.rendimiento_M2} pzs/m²` : 'N/A'}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Precio/m²:</span>
-            <span className="text-gray-900">${product.precio_M2}</span>
+            <span className="text-gray-900">{product.precio_M2 ? `$${product.precio_M2}` : 'N/A'}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Clave:</span>

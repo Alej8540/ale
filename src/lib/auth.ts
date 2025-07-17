@@ -51,15 +51,19 @@ export async function signUp(
  * Inicia sesión
  */
 export async function signIn(email: string, password: string) {
+  console.log('Attempting to sign in with:', email);
+  
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password
   });
 
   if (error) {
+    console.error('Supabase auth error:', error);
     throw new Error(`Error al iniciar sesión: ${error.message}`);
   }
 
+  console.log('Sign in successful:', data);
   return data;
 }
 

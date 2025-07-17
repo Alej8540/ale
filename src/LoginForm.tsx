@@ -9,7 +9,7 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const [formData, setFormData] = useState({
     email: 'admin@ceramicasa.com',
-    password: '1'
+    password: 'Admin1'
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const handleQuickLogin = () => {
     setFormData({
       email: 'admin@ceramicasa.com',
-      password: '1'
+      password: 'Admin1'
     });
   };
 
@@ -155,7 +155,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
             <h3 className="text-sm font-medium text-gray-700 mb-2">Credenciales de demostración:</h3>
             <div className="text-sm text-gray-600 space-y-1">
               <p><strong>Usuario:</strong> admin@ceramicasa.com</p>
-              <p><strong>Contraseña:</strong> 1</p>
+              <p><strong>Contraseña:</strong> Admin1</p>
             </div>
           </div>
         </div>
